@@ -60,9 +60,9 @@ pip install -r requirements.txt
 
 ### Manage layers project and install layers as a pyproject for local development
 
-pyproject.toml
-
 ```toml 
+# pyproject.toml
+
 [tool.setuptools.packages.find]
 where = ["layers/project_layer/python/"]
 include = ["project_modules"]
@@ -77,9 +77,9 @@ pip install -e .
 
 ### Manage SAM Resources
 
-template.yaml
-
 ```yaml 
+# template.yaml
+
 HelloWorldFunction:
   Type: AWS::Serverless::Function
   Properties:
@@ -96,9 +96,9 @@ HelloWorldFunction:
 
 ### Manage local project dependancies
 
-requirements.txt
-
 ```txt 
+# requirements.txt
+
 -r layers/bin/requirements.txt
 aws-sam-cli
 ...
@@ -106,9 +106,9 @@ aws-sam-cli
 
 ### Manage deployed project dependancies
 
-layers/bin/requirements.txt
-
 ```txt 
+# layers/bin/requirements.txt
+
 -r layers/project_layer/python/project_modules/requirements.txt
 -r hello_world/requirements.txt
 ```
