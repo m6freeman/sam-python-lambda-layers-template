@@ -1,0 +1,7 @@
+-r layers/bin/requirements.txt
+aws-sam-cli
+black
+mypy
+pre-commit
+pytest
+

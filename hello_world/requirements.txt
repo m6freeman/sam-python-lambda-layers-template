@@ -1,0 +1,4 @@
+aws-lambda-powertools[tracer]
+boto3
+requests
+result

@@ -1,0 +1,2 @@
+-r layers/project_layer/python/project_modules/requirements.txt
+-r hello_world/requirements.txt

@@ -1,0 +1,59 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+    sam-python-lambda-layers-template
+
+    An empty sam lambda and layer project maintaining a python project structure within the layers.
+
+Globals:
+    Function:
+        Timeout: 5
+        MemorySize: 128
+        Runtime: python3.12
+
+Resources:
+    ProjectLayer:
+        Type: AWS::Serverless::LayerVersion
+        Properties:
+            ContentUri: layers/project_layer/
+            CompatibleRuntimes:
+                - python3.12
+
+    ProjectLibraryLayer:
+        Type: AWS::Serverless::LayerVersion
+        Properties:
+            ContentUri: layers/bin
+            CompatibleRuntimes:
+                - python3.12
+        Metadata:
+            BuildMethod: python3.12
+
+    HelloWorldFunction:
+        Type: AWS::Serverless::Function
+        Properties:
+            Handler: app.lambda_handler
+            CodeUri: hello_world
+            Description: Hello World function
+            Architectures:
+                - x86_64
+            Tracing: Active
+            Layers:
+                - !Ref ProjectLayer
+                - !Ref ProjectLibraryLayer
+            Environment:
+                Variables:
+                    POWERTOOLS_SERVICE_NAME: PowertoolsHelloWorld
+                    POWERTOOLS_METRICS_NAMESPACE: Powertools
+                    LOG_LEVEL: INFO
+            Tags:
+                LambdaPowertools: python
+
+Outputs:
+    ProjectLayerArn:
+        Description: "Common function Layer"
+        Value: !Ref ProjectLayer
+        Export:
+            Name: !Sub '${AWS::StackName}-ProjectLayerArn'
+    HelloWorldFunction:
+        Description: "Hello World Lambda Function ARN"
+        Value: !GetAtt HelloWorldFunction.Arn
