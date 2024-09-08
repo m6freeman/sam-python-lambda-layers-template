@@ -58,7 +58,7 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-### Manage layers project and install layers as a pyproject for local development
+### Manage layers pyproject 
 
 ```toml 
 # pyproject.toml
@@ -70,6 +70,8 @@ include = ["project_modules"]
 [project]
 name = "project_modules"
 ```
+
+### Install layers as a pyproject for local development
 
 ```sh
 pip install -e .
