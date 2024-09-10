@@ -1,4 +1,6 @@
 -r layers/bin/requirements.txt
+-r layers/project_layer/python/project_modules/requirements.txt
+-r hello_world/requirements.txt
 aws-sam-cli
 black
 mypy

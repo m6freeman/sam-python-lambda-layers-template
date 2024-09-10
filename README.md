@@ -17,19 +17,19 @@ An empty SAM template project integrated with the python project structure allow
  │  └── requirements.txt              # Dependancies of the function hander
  ├── layers
  │  ├── bin                           # Deployed as a separate Layer
- │  │  └── requirements.txt           # Imports all project service dependancies
+ │  │  └── requirements.txt           # All shared libaries go here 
  │  └── project_layer
  │     └── python
  │        └── project_modules         # Built as a pyproject for local development
  │           ├── module.py
- │           └── requirements.txt     # Dependencies for project_modules
+ │           └── requirements.txt     # Dependencies of the project_modules
  ├── tests
  │  ├── unit                          # Functional Unit tests
  │  │  └── test_handler.py
  │  └── requirements.txt
  ├── pyproject.toml                   # Install layers as pyproject for local development
  ├── README.md
- ├── requirements.txt                 # Local development dependencies and imports layers/bin/requirements.txt
+ ├── requirements.txt                 # Local development dependencies and imports all project dependancies
  └── template.yaml                    # Define your SAM resources
 ```
 
@@ -101,9 +101,10 @@ HelloWorldFunction:
 ```txt 
 # requirements.txt
 
+-r layers/project_layer/python/project_modules/requirements.txt
 -r layers/bin/requirements.txt
+-r hello_world/requirements.txt
 aws-sam-cli
-...
 ```
 
 ### Manage deployed project dependancies
@@ -111,8 +112,10 @@ aws-sam-cli
 ```txt 
 # layers/bin/requirements.txt
 
--r layers/project_layer/python/project_modules/requirements.txt
--r hello_world/requirements.txt
+aws-lambda-powertools
+boto3
+result
+...
 ```
 
 ### Build and Deploy
